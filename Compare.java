@@ -180,18 +180,20 @@ static String s7 = "10111";
           return s6;
         }else if(comando.equals("s7")){
           return s7;
+        }else if (comando.equals("zero")){
+          return "000000";
         }else{
-          return "error";
+          System.out.println(comando);	
+          return "ERROR";
         }
-
     }
 
     public static String  validate(String comando) {
       
         
-        if(comando.equals("add") || comando.equals("sub") || comando.equals("div") || comando.equals("mult") || comando.equals("and") || comando.equals("or") || comando.equals("xor") || comando.equals("nor") || comando.equals("slt") || comando.equals("sll") ||comando.equals("jr")){
+        if(comando.equals("add") || comando.equals("sub") || comando.equals("div") || comando.equals("mult") || comando.equals("and") || comando.equals("or") || comando.equals("xor") || comando.equals("nor") || comando.equals("slt") ||comando.equals("jr") ){
           return "R";
-        }else if(comando.equals("lw") || comando.equals("sw") || comando.equals("beq") || comando.equals("bne") || comando.equals("ori") || comando.equals("andi") || comando.equals("addi")){
+        }else if(comando.equals("lw") || comando.equals("sw") || comando.equals("beq") || comando.equals("bne") || comando.equals("ori") || comando.equals("andi") || comando.equals("addi") || comando.equals("slti") || comando.equals("srl") || comando.equals("sll")  ){
           return "I";
         }else if(comando.equals("j") || comando.equals("jal")){
           return "J";
