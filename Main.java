@@ -33,7 +33,7 @@ class Main {
       if(type.equals("R")){
         if(line.indexOf("jr") >=0){
           // jr + 21 zeros
-          opcode = "001000000000000000000000000";
+          opcode = "00000010001000000000000000";
           rt =  comparador.comparar(arrOfStr[1]);
           line = opcode + rt;
         }else{
