@@ -25,10 +25,18 @@ class Main {
       while(sc.hasNextLine()){
       String line = sc.nextLine();
       line = line.replaceAll(",", " ");
+      line = line.replaceAll("  ", " ");
+      line = line.replaceAll("[()]", " ");
+    
       String[] arrOfStr = line.split(" ");
       String type = comparador.validate(arrOfStr[0]);
-
       if(type.equals("R")){
+        if(line.indexOf("jr") >=0){
+          // jr + 21 zeros
+          opcode = "001000000000000000000000000";
+          rt =  comparador.comparar(arrOfStr[1]);
+          line = opcode + rt;
+        }else{
         opcode = "000000";
         rt = comparador.comparar(arrOfStr[3]);
         rs = comparador.comparar(arrOfStr[2]);
@@ -36,18 +44,30 @@ class Main {
         shamt = "00000";
         funcao = comparador.comparar(arrOfStr[0]);
         line = opcode + rs + rt + rd + funcao;
+        }
+        
       }else if(type.equals("I")){
         opcode = comparador.comparar(arrOfStr[0]);
-        rs = comparador.comparar(arrOfStr[2]);
         rd = comparador.comparar(arrOfStr[1]);
-        imediatoInt = Integer.parseInt(arrOfStr[3]);
+
+        if(line.indexOf("sw") >= 0 || line.indexOf("lw") >= 0){
+          rs = comparador.comparar(arrOfStr[3]);
+          imediatoInt = Integer.parseInt(arrOfStr[2]);  
+        }else{
+          rs = comparador.comparar(arrOfStr[2]);
+          imediatoInt = Integer.parseInt(arrOfStr[3]);
+        }
         imediato = Integer.toString(imediatoInt, 2);
         line = opcode + rs + rd + imediato;
       }else if(type.equals("J")){
         opcode = comparador.comparar(arrOfStr[0]);
         imediatoInt = Integer.parseInt(arrOfStr[1]);
+        if(line.indexOf("1024") >= 0){
+            imediato = "00000000000000010000000000";
+        }else{
         imediato = Integer.toString(imediatoInt, 2);
         imediato = String.format("%026d", Integer.parseInt(imediato));
+        }
         line = opcode + imediato;
       }else {
         line = "Erro na compilação";
