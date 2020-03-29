@@ -31,7 +31,7 @@ class Main {
       line = line.replaceAll(",", " ");
       line = line.replaceAll("  ", " ");
       line = line.replaceAll("[()]", " ");
-      if(line.indexOf(jal)>=0){
+      if(line.indexOf("jal")>=0){
         jrString = Integer.toString(count, 2);;
       }
       String[] arrOfStr = line.split(" ");
