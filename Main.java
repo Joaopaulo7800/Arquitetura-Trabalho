@@ -31,6 +31,7 @@ class Main {
       line = line.replaceAll(",", " ");
       line = line.replaceAll("  ", " ");
       line = line.replaceAll("[()]", " ");
+      line = line.replaceAll("$", "");
       if(line.indexOf("jal")>=0){
         jrString = Integer.toString(count, 2);;
       }
@@ -40,10 +41,19 @@ class Main {
         opcode = "000000";
         if(line.indexOf("jr") >=0){
           // jr + 21 zeros
-          rs =  comparador.comparar(arrOfStr[1]);
-          rt =  "00000";
-          rt =  "00000";
-          rd =  "00000";
+          if(line.indexOf("ra") >= 0){
+            rs = String.format("%5", Integer.parseInt(jrString));
+            rt = "";
+            rd = "";
+            rs = "";
+            shamt = "";
+          }else{
+            rs =  comparador.comparar(arrOfStr[1]);
+            System.out.println('1');	
+            rt = "00000";
+            rd = "00000";
+            shamt = "00000";
+          }
         }else{
           rt = comparador.comparar(arrOfStr[3]);
           rs = comparador.comparar(arrOfStr[2]);
@@ -92,10 +102,7 @@ class Main {
 		}
 		catch (IOException excecao) {
 			System.out.println("Erro na leitura do arquivo: " + excecao);	
-		}
-
-    
-    
+		}    
   }
 }
 
