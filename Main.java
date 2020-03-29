@@ -20,6 +20,7 @@ class Main {
       String imediato = "";
       int imediatoInt = 0;	
       int jr = "";
+      String jrString = "";
       int count = 0;
 
       var sb = new StringBuilder();
@@ -31,7 +32,7 @@ class Main {
       line = line.replaceAll("  ", " ");
       line = line.replaceAll("[()]", " ");
       if(line.indexOf(jal)>=0){
-        jr = Integer.toString(count, 2);;
+        jrString = Integer.toString(count, 2);;
       }
       String[] arrOfStr = line.split(" ");
       String type = comparador.validate(arrOfStr[0]);
