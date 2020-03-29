@@ -32,6 +32,7 @@ class Main {
       line = line.replaceAll("  ", " ");
       line = line.replaceAll("[()]", " ");
       line = line.replaceAll("$", "");
+      line = line.replaceAll(",", "");
       if(line.indexOf("jal")>=0){
         jrString = Integer.toString(count, 2);;
       }
@@ -54,14 +55,20 @@ class Main {
             rd = "00000";
             shamt = "00000";
           }
+          funcao = comparador.comparar(arrOfStr[0]);
+          line = opcode + rs + rt + rd + shamt + funcao;
         }else{
-          rt = comparador.comparar(arrOfStr[3]);
-          rs = comparador.comparar(arrOfStr[2]);
-          rd = comparador.comparar(arrOfStr[1]);
-          shamt = "00000";
+          if(arrOfStr.length <= 3){
+            line = "Numero incorreto de registradores";
+          }else{
+            rt = comparador.comparar(arrOfStr[3]);
+            rs = comparador.comparar(arrOfStr[2]);
+            rd = comparador.comparar(arrOfStr[1]);
+            shamt = "00000";
+            funcao = comparador.comparar(arrOfStr[0]);
+            line = opcode + rs + rt + rd + shamt + funcao;
+          }
         }
-         funcao = comparador.comparar(arrOfStr[0]);
-         line = opcode + rs + rt + rd + shamt + funcao;
         
       }else if(type.equals("I")){
         opcode = comparador.comparar(arrOfStr[0]);
@@ -70,13 +77,13 @@ class Main {
         if(line.indexOf("sw") >= 0 || line.indexOf("lw") >= 0){
           rs = comparador.comparar(arrOfStr[3]);
           imediatoInt = Integer.parseInt(arrOfStr[2]);  
+          imediato = String.format("%016d", Integer.parseInt(imediato));
         }else{
           rs = comparador.comparar(arrOfStr[2]);
           imediatoInt = Integer.parseInt(arrOfStr[3]);
           imediato = Integer.toString(imediatoInt, 2);
           imediato = String.format("%016d", Integer.parseInt(imediato));
         }
-        imediato = Integer.toString(imediatoInt, 2);
         line = opcode + rs + rd + imediato;
       }else if(type.equals("J")){
         opcode = comparador.comparar(arrOfStr[0]);
