@@ -19,7 +19,7 @@ class Main {
       String funcao = "";
       String imediato = "";
       int imediatoInt = 0;	
-      int jr = "";
+      int jr = 0;
       String jrString = "";
       int count = 0;
 
